@@ -1,3 +1,6 @@
+//! Naga is a shader translation library providing safe and performant conversions
+//! between various shader formats and [SPIR-V](https://www.khronos.org/spir/).
+
 #![allow(clippy::new_without_default)]
 
 mod arena;
@@ -22,13 +25,17 @@ pub struct Header {
     pub generator: u32,
 }
 
+/// Data type for size in bytes of a type.
 pub type Bytes = u8;
 
 #[repr(u8)]
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum VectorSize {
+    /// 2D vector
     Bi = 2,
+    /// 3D vector
     Tri = 3,
+    /// 4D vector
     Quad = 4,
 }
 
@@ -83,6 +90,7 @@ pub enum TypeInner {
     Sampler,
 }
 
+/// Fixed or specialization constant
 #[derive(Debug)]
 pub struct Constant {
     pub name: Option<String>,
@@ -180,8 +188,11 @@ pub enum IntrinsicFunction {
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeAxis {
+    /// Derivatve on the `X` axis.
     X,
+    /// Derivative on the `Y` axis.
     Y,
+    /// Sum of the absolute values of the `X` and `Y` derivatives.
     Width,
 }
 
